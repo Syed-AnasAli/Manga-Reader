@@ -1,16 +1,28 @@
-# React + Vite
+# 📖 Manga Reader
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based manga reading web app powered by the [MangaDex API](https://api.mangadex.org). Browse manga titles, view chapter lists, and read chapters directly in the browser.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Features
 
-## React Compiler
+- Browse a paginated list of manga titles from MangaDex
+- View manga details: cover art, description, status, release year, tags, and alternative titles
+- List all available English chapters for any manga
+- Read chapter pages in-browser
+- Toggle manga cover art visibility (sensitive content warning included)
+- "Show More" pagination to load additional titles
+- 404 Not Found page for invalid routes
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React** (with React Router for navigation)
+- **Axios** (API requests)
+- **Tailwind CSS** (styling)
+- **Lucide React** (icons)
+- **MangaDex API** (manga data & images)
+
+
+## ⚠️ Disclaimer
+
+This site uses the MangaDex API. All manga content and copyrights are reserved by their respective owners. This project is for personal/educational use only and is not affiliated with MangaDex.
