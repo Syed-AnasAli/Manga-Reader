@@ -24,6 +24,11 @@ const HomePage = () => {
   async function getLastChapter(mangaId) {
     const lastCh = await axios.get(
       `https://api.mangadex.org/manga/${mangaId}/feed?order[volume]=desc&order[chapter]=desc`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
     );
     let ch = lastCh.data.data[0].attributes.chapter;
 
@@ -33,6 +38,11 @@ const HomePage = () => {
   async function getData() {
     const res = await axios.get(
       `https://api.mangadex.org/manga?limit=${limit}&includes[]=cover_art`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
     );
     console.log(res.data.data);
 

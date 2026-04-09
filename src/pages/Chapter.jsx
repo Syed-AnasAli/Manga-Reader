@@ -11,6 +11,11 @@ const Chapter = () => {
   const getChData = async () => {
     let res = await axios.get(
       `https://api.mangadex.org/at-home/server/${state.id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
     );
     console.log(res);
     let chapters = res.data.chapter.data.map((ch) => {
@@ -45,7 +50,7 @@ const Chapter = () => {
         </Link>
       </div>
 
-      <div className="">
+      <div>
         {chData.map((ch, idx) => {
           return (
             <div className="w-[40vw]" key={idx}>

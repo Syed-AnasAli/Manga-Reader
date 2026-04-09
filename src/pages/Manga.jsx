@@ -13,6 +13,11 @@ const mangaDescription = () => {
   const apiCall = async () => {
     const res = await axios.get(
       `https://api.mangadex.org/manga/${state.id}/feed?translatedLanguage[]=en&order[volume]=desc&order[chapter]=desc`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
     );
     console.log(res);
 
