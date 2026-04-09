@@ -31,15 +31,15 @@ const Chapter = () => {
   return (
     <div className="flex justify-center items-center flex-col gap-10 p-10 text-xl font-semibold">
       <div className="self-start flex-1">
-        {state.title + " / Chapter " + state.num}
+        {"Home / Manga /" + state.title + " / Chapter " + state.num}
       </div>
 
-      <div className="flex gap-10">
-        <Link className="font-lg flex justify-center items-center border-2 border-black bg-amber-600 font-white font-bold px-4 py-2 rounded-md">
+      <div className="flex gap-10 ">
+        <Link className="text-md flex justify-center items-center border-2 border-black bg-amber-500 font-bold px-3 py-2 rounded-md">
           <ArrowLeft strokeWidth={2.5} />
           Prev
         </Link>
-        <Link className="font-lg flex justify-center items-center border-2 border-black bg-amber-600 font-bold  px-4 py-2 rounded-md">
+        <Link className="text-md flex justify-center items-center border-2 border-black bg-amber-500 font-bold px-3 py-2 rounded-md">
           Next
           <ArrowRight strokeWidth={2.5} />
         </Link>
@@ -56,11 +56,11 @@ const Chapter = () => {
       </div>
 
       <div className="flex gap-10">
-        <Link className="font-lg flex justify-center items-center border-2 border-black bg-amber-600 font-white font-bold px-4 py-2 rounded-md">
+        <Link className="text-md flex justify-center items-center border-2 border-black bg-amber-500 font-bold px-3 py-2 rounded-md">
           <ArrowLeft strokeWidth={2.5} />
           Prev
         </Link>
-        <Link className="font-lg flex justify-center items-center border-2 border-black bg-amber-600 font-bold  px-4 py-2 rounded-md">
+        <Link className="text-md flex justify-center items-center border-2 border-black bg-amber-500 font-bold px-3 py-2 rounded-md">
           Next
           <ArrowRight strokeWidth={2.5} />
         </Link>

@@ -68,13 +68,16 @@ const mangaDescription = () => {
               return (
                 <div
                   onClick={() => {
-                    navigate("/chapter", {
-                      state: {
-                        id: chapter.id,
-                        title: state.title,
-                        num: chapter.num,
+                    navigate(
+                      `/manga/${state.title.replaceAll(" ", "-").toLowerCase()}/chapter-${chapter.num}`,
+                      {
+                        state: {
+                          id: chapter.id,
+                          title: state.title,
+                          num: chapter.num,
+                        },
                       },
-                    });
+                    );
                   }}
                   key={idx}
                   className="cursor-pointer active:scale-95"

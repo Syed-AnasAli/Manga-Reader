@@ -10,11 +10,12 @@ const App = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
+
       <div className="flex-1">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path=":mangaName" element={<MangaPage />} />
-          <Route path="chapter" element={<Chapter />} />
+          <Route path="/manga/:mangaName" element={<MangaPage />} />
+          <Route path="/manga/:mangaName/:chapter" element={<Chapter />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>

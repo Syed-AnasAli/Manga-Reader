@@ -5,7 +5,7 @@ const CoverCard = (props) => {
   let navigate = useNavigate();
 
   const showMangaPage = () => {
-    navigate("/manga", {
+    navigate(`/manga/${props.title.replaceAll(" ", "-").toLowerCase()}`, {
       state: {
         cover: props.cover,
         coverState: props.coverState,
