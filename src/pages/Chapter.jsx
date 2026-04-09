@@ -10,7 +10,7 @@ const Chapter = () => {
 
   const getChData = async () => {
     let res = await axios.get(
-      `https://api.mangadex.org/at-home/server/${state.id}`,
+      `https://cors-anywhere.herokuapp.com/https://api.mangadex.org/at-home/server/${state.id}`,
       {
         headers: {
           "Content-Type": "application/json",
