@@ -1,7 +1,38 @@
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import noImage from "../assets/no-image.jpg";
+import axios from "axios";
 
 const MangaCard = (state) => {
+  const navigate = useNavigate();
+
+  async function navigation(bool) {
+    const lastCh = await axios.get(
+      `https://api.mangadex.org/manga/${state.id}/feed?order[volume]=desc&order[chapter]=desc`,
+    );
+
+    let chNum, chId, idx;
+
+    if (bool == false) {
+      chNum = lastCh.data.data[0]?.attributes?.chapter || 0;
+      chId = lastCh.data.data[0].id;
+    } else {
+      idx = lastCh.data.data.length - 1;
+      chNum = lastCh.data.data[idx]?.attributes?.chapter || 0;
+      chId = lastCh.data.data[idx].id;
+    }
+
+    navigate(
+      `/manga/${state?.title.replaceAll(" ", "-").toLowerCase()}/chapter-${chNum}`,
+      {
+        state: {
+          id: chId,
+          title: state?.title,
+          num: chNum,
+        },
+      },
+    );
+  }
+
   return (
     <div>
       <div className=" mb-10 ml-10 mr-10 bg-amber-100 pt-10 pb-15">
@@ -47,18 +78,25 @@ const MangaCard = (state) => {
             </div>
             <div className=" flex gap-5">
               <div>
-                <Link
-                  to="#"
-                  className="font-lg bg-amber-600 font-bold border-amber-950 border-2 px-2 py-2 rounded-md"
+                <div
+                  className="font-lg bg-amber-600 font-bold border-amber-950 border-2 px-2 py-2 rounded-md active:scale-95 cursor-pointer"
+                  onClick={() => {
+                    navigation(true);
+                  }}
                 >
                   Read First
-                </Link>
+                </div>
               </div>
 
               <div>
-                <Link className="font-lg bg-amber-600 font-bold border-amber-950 border-2 px-2 py-2 rounded-md">
+                <div
+                  onClick={() => {
+                    navigation(false);
+                  }}
+                  className="font-lg bg-amber-600 font-bold border-amber-950 border-2 px-2 py-2 rounded-md active:scale-95 cursor-pointer"
+                >
                   Read Latest
-                </Link>
+                </div>
               </div>
             </div>
           </div>

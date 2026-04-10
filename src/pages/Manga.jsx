@@ -55,6 +55,7 @@ const mangaDescription = () => {
         year={state.year}
         pronouns={state.pronouns}
         tags={state.tags}
+        id={state.id}
       />
       <div className="mx-20 mb-10">
         <h5 className="text-3xl font-bold">Summary:</h5>
