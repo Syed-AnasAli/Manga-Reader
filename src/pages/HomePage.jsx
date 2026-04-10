@@ -21,28 +21,49 @@ const HomePage = () => {
     }),
   );
 
-  async function getLastChapter(mangaId) {
+  async function getLast2Chapter(mangaId) {
     const lastCh = await axios.get(
-      `https://cors-anywhere.herokuapp.com/https://api.mangadex.org/manga/${mangaId}/feed?order[volume]=desc&order[chapter]=desc`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
+      `https://api.mangadex.org/manga/${mangaId}/feed?order[volume]=desc&order[chapter]=desc`,
     );
-    let ch = lastCh.data.data[0].attributes.chapter;
 
-    return Number(ch);
+    let j = 1;
+
+    if (lastCh.data.data[0]?.attributes?.chapter == null) {
+      return {
+        lastCh: "OS",
+        chId: lastCh.data.data[0].id,
+        ch2Id: null,
+        last2Ch: 0,
+      };
+    }
+
+    if (lastCh.data.data[0]?.attributes?.chapter == 0) {
+      return {
+        lastCh: 0,
+        chId: null,
+        ch2Id: null,
+        last2Ch: 0,
+      };
+    }
+
+    let ch = lastCh.data.data[0]?.attributes?.chapter || 0;
+    let ch2 = lastCh.data.data[j]?.attributes?.chapter || 0;
+    while (ch2 == ch && ch != 0) {
+      j++;
+      ch2 = lastCh.data.data[j]?.attributes.chapter;
+    }
+
+    return {
+      lastCh: Number(ch),
+      chId: lastCh.data.data[0].id,
+      ch2Id: lastCh.data.data[j].id,
+      last2Ch: Number(ch2),
+    };
   }
 
   async function getData() {
     const res = await axios.get(
-      `https://cors-anywhere.herokuapp.com/https://api.mangadex.org/manga?limit=${limit}&includes[]=cover_art`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
+      `https://api.mangadex.org/manga?limit=${limit}&includes[]=cover_art`,
     );
     console.log(res.data.data);
 
@@ -76,7 +97,12 @@ const HomePage = () => {
           (t) => t.type === "cover_art",
         ).attributes.fileName;
 
-        let lastChapter = await getLastChapter(manga.id);
+        let lastCh = await getLast2Chapter(manga.id);
+
+        let lastChapter = lastCh.lastCh;
+        let lastChapterID = lastCh.chId;
+        let lastChapter2ID = lastCh.ch2Id;
+        let last2Chapter = lastCh.last2Ch;
 
         let tags = "";
 
@@ -89,6 +115,9 @@ const HomePage = () => {
           title: titleEn,
           cover: `https://uploads.mangadex.org/covers/${manga.id}/${mangacoverid}`,
           lastCh: lastChapter,
+          last2Ch: last2Chapter,
+          lastChID: lastChapterID,
+          last2ChID: lastChapter2ID,
           desc: description,
           status: status,
           year: releasedYear,
@@ -127,6 +156,9 @@ const HomePage = () => {
                 coverState={coverImg}
                 title={manga.title}
                 lastCh={manga.lastCh}
+                last2Ch={manga.last2Ch}
+                lastChID={manga.lastChID}
+                last2ChID={manga.last2ChID}
                 desc={manga.desc}
                 status={manga.status}
                 year={manga.year}

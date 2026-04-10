@@ -12,12 +12,7 @@ const mangaDescription = () => {
 
   const apiCall = async () => {
     const res = await axios.get(
-      `https://cors-anywhere.herokuapp.com/https://api.mangadex.org/manga/${state.id}/feed?translatedLanguage[]=en&order[volume]=desc&order[chapter]=desc`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
+      `https://api.mangadex.org/manga/${state.id}/feed?&order[volume]=desc&order[chapter]=desc`,
     );
     console.log(res);
 

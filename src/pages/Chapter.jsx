@@ -10,14 +10,8 @@ const Chapter = () => {
 
   const getChData = async () => {
     let res = await axios.get(
-      `https://cors-anywhere.herokuapp.com/https://api.mangadex.org/at-home/server/${state.id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
+      `https://api.mangadex.org/at-home/server/${state.id}`,
     );
-    console.log(res);
     let chapters = res.data.chapter.data.map((ch) => {
       let chImg = `https://uploads.mangadex.org/data/${res.data.chapter.hash}/${ch}`;
 
@@ -31,7 +25,6 @@ const Chapter = () => {
   useEffect(() => {
     getChData();
   }, []);
-  console.log(state.id);
 
   return (
     <div className="flex justify-center items-center flex-col gap-10 p-10 text-xl font-semibold">

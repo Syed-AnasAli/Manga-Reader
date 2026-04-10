@@ -21,6 +21,19 @@ const CoverCard = (props) => {
     });
   };
 
+  const showChapter = (chNum, chID) => {
+    navigate(
+      `/manga/${props.title.replaceAll(" ", "-").toLowerCase()}/chapter-${chNum}`,
+      {
+        state: {
+          id: chID,
+          title: props.title,
+          num: chNum,
+        },
+      },
+    );
+  };
+
   return (
     <div className="flex gap-2 flex-col p-5">
       <div
@@ -37,13 +50,23 @@ const CoverCard = (props) => {
         {props.title}
       </div>
       {props.lastCh > 0 && (
-        <button className="h-7 w-30 bg-gray-300 rounded-2xl flex items-center justify-center">
+        <button
+          onClick={() => {
+            showChapter(props.lastCh, props.lastChID);
+          }}
+          className="h-7 w-30 bg-gray-300 rounded-2xl flex items-center justify-center active:scale-95"
+        >
           Chapter {parseFloat(props.lastCh.toFixed(2))}
         </button>
       )}
-      {props.lastCh - 1 > 0 && (
-        <button className="h-7 w-30 bg-gray-300 rounded-2xl flex items-center justify-center">
-          Chapter{parseFloat((props.lastCh - 1).toFixed(2))}
+      {props.last2Ch > 0 && (
+        <button
+          onClick={() => {
+            showChapter(props.last2Ch, props.last2ChID);
+          }}
+          className="h-7 w-30 bg-gray-300 rounded-2xl flex items-center justify-center active:scale-95"
+        >
+          Chapter {parseFloat(props.last2Ch.toFixed(2))}
         </button>
       )}
     </div>
