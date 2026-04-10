@@ -33,11 +33,11 @@ const Chapter = () => {
       </div>
 
       <div className="flex gap-10 ">
-        <Link className="text-md flex justify-center items-center border-2 border-black bg-amber-500 font-bold px-3 py-2 rounded-md">
+        <Link className="text-md flex justify-center items-center border-2 border-black bg-amber-600 font-bold px-3 py-2 rounded-md">
           <ArrowLeft strokeWidth={2.5} />
           Prev
         </Link>
-        <Link className="text-md flex justify-center items-center border-2 border-black bg-amber-500 font-bold px-3 py-2 rounded-md">
+        <Link className="text-md flex justify-center items-center border-2 border-black bg-amber-600 font-bold px-3 py-2 rounded-md">
           Next
           <ArrowRight strokeWidth={2.5} />
         </Link>
@@ -54,11 +54,11 @@ const Chapter = () => {
       </div>
 
       <div className="flex gap-10">
-        <Link className="text-md flex justify-center items-center border-2 border-black bg-amber-500 font-bold px-3 py-2 rounded-md">
+        <Link className="text-md flex justify-center items-center border-2 border-black bg-amber-600 font-bold px-3 py-2 rounded-md">
           <ArrowLeft strokeWidth={2.5} />
           Prev
         </Link>
-        <Link className="text-md flex justify-center items-center border-2 border-black bg-amber-500 font-bold px-3 py-2 rounded-md">
+        <Link className="text-md flex justify-center items-center border-2 border-black bg-amber-600 font-bold px-3 py-2 rounded-md">
           Next
           <ArrowRight strokeWidth={2.5} />
         </Link>
