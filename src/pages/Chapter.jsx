@@ -1,17 +1,46 @@
 import { useEffect } from "react";
-import { useLocation, Link } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
 import { useState } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import ChapterButtons from "../components/ChapterButtons";
 
 const Chapter = () => {
+  const navigate = useNavigate();
   let { state } = useLocation();
   const [chData, setChData] = useState([]);
+  const [allChData, setAllChData] = useState([]);
+
+  async function getAllChData() {
+    const ch = await axios.get(
+      `https://api.mangadex.org/manga/${state.mId}/feed?order[volume]=desc&order[chapter]=desc`,
+    );
+    setAllChData(ch.data.data);
+  }
+
+  function nextPrev(num) {
+    let idx = allChData.findIndex((t) => t.id == state.id);
+    idx = idx + num;
+    let chId = allChData[idx]?.id || null;
+    let chNum = allChData[idx]?.attributes.chapter || null;
+
+    navigate(
+      `/manga/${state.title.replaceAll(" ", "-").toLowerCase()}/chapter-${chNum}`,
+      {
+        state: {
+          mId: state.mId,
+          title: state.title,
+          id: chId,
+          num: chNum,
+        },
+      },
+    );
+  }
 
   const getChData = async () => {
     let res = await axios.get(
       `https://api.mangadex.org/at-home/server/${state.id}`,
     );
+
     let chapters = res.data.chapter.data.map((ch) => {
       let chImg = `https://uploads.mangadex.org/data/${res.data.chapter.hash}/${ch}`;
 
@@ -23,46 +52,30 @@ const Chapter = () => {
   };
 
   useEffect(() => {
+    setChData([]);
     getChData();
-  }, []);
+  }, [state.id]);
+
+  useEffect(() => {
+    getAllChData();
+  }, [state.mId]);
 
   return (
     <div className="flex justify-center items-center flex-col gap-10 p-10 text-xl font-semibold">
       <div className="self-start flex-1">
         {"Home / Manga /" + state.title + " / Chapter " + state.num}
       </div>
-
-      <div className="flex gap-10 ">
-        <Link className="text-md flex justify-center items-center border-2 border-black bg-amber-600 font-bold px-3 py-2 rounded-md">
-          <ArrowLeft strokeWidth={2.5} />
-          Prev
-        </Link>
-        <Link className="text-md flex justify-center items-center border-2 border-black bg-amber-600 font-bold px-3 py-2 rounded-md">
-          Next
-          <ArrowRight strokeWidth={2.5} />
-        </Link>
-      </div>
-
+      <ChapterButtons nav={nextPrev} />
       <div>
         {chData.map((ch, idx) => {
           return (
-            <div className="w-[40vw]" key={idx}>
-              <img src={ch.chImg} alt="" />
+            <div className="w-[80vw] md:w-[40vw]" key={idx}>
+              <img src={ch.chImg} loading="lazy" alt="" />
             </div>
           );
         })}
       </div>
-
-      <div className="flex gap-10">
-        <Link className="text-md flex justify-center items-center border-2 border-black bg-amber-600 font-bold px-3 py-2 rounded-md">
-          <ArrowLeft strokeWidth={2.5} />
-          Prev
-        </Link>
-        <Link className="text-md flex justify-center items-center border-2 border-black bg-amber-600 font-bold px-3 py-2 rounded-md">
-          Next
-          <ArrowRight strokeWidth={2.5} />
-        </Link>
-      </div>
+      <ChapterButtons nav={nextPrev} />
     </div>
   );
 };

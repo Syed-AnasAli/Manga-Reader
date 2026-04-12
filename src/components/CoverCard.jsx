@@ -26,6 +26,7 @@ const CoverCard = (props) => {
       `/manga/${props.title.replaceAll(" ", "-").toLowerCase()}/chapter-${chNum}`,
       {
         state: {
+          mId: props.id,
           id: chID,
           title: props.title,
           num: chNum,
@@ -54,7 +55,7 @@ const CoverCard = (props) => {
           onClick={() => {
             showChapter(props.lastCh, props.lastChID);
           }}
-          className="h-7 w-30 bg-gray-300 rounded-2xl flex items-center justify-center active:scale-95"
+          className="h-7 w-30 bg-gray-300 rounded-2xl flex items-center justify-center active:scale-95 cursor-pointer"
         >
           Chapter {parseFloat(props.lastCh.toFixed(2))}
         </button>
@@ -64,7 +65,7 @@ const CoverCard = (props) => {
           onClick={() => {
             showChapter(props.last2Ch, props.last2ChID);
           }}
-          className="h-7 w-30 bg-gray-300 rounded-2xl flex items-center justify-center active:scale-95"
+          className="h-7 w-30 bg-gray-300 rounded-2xl flex items-center justify-center active:scale-95 cursor-pointer"
         >
           Chapter {parseFloat(props.last2Ch.toFixed(2))}
         </button>

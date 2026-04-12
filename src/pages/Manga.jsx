@@ -37,7 +37,7 @@ const mangaDescription = () => {
 
   const [coverImg, setCoverImg] = useState(state.coverState);
   let status = state.status;
-  status = status.charAt(0).toUpperCase() + status.slice(1);
+  status = status.charAt(0).toUpperCase() + status.slice(1) || null;
 
   function warning() {
     coverImg ? setCoverImg(false) : setCoverImg(true);
@@ -64,7 +64,7 @@ const mangaDescription = () => {
       <div className="mx-10 mb-10 flex flex-col">
         <h5 className="text-3xl font-bold ml-10">Chapters:</h5>
         <div>
-          <div className="flex flex-wrap gap-5 pt-5 flex-1 items-center mx-auto pl-10">
+          <div className="flex flex-wrap gap-2 pt-5 flex-1 justify-center lg:justify-start lg:pl-10 lg:gap-5 items-center mx-auto ">
             {chapters.map((chapter, idx) => {
               return (
                 <div
@@ -73,6 +73,7 @@ const mangaDescription = () => {
                       `/manga/${state.title.replaceAll(" ", "-").toLowerCase()}/chapter-${chapter.num}`,
                       {
                         state: {
+                          mId: state.id,
                           id: chapter.id,
                           title: state.title,
                           num: chapter.num,
