@@ -12,7 +12,7 @@ const mangaDescription = () => {
 
   const apiCall = async () => {
     const res = await axios.get(
-      `https://api.mangadex.org/manga/${state.id}/feed?&order[volume]=desc&order[chapter]=desc`,
+      `/api/mangadex/manga/${state.id}/feed?&order[volume]=desc&order[chapter]=desc`,
     );
     console.log(res);
 
