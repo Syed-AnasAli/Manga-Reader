@@ -12,7 +12,7 @@ const Chapter = () => {
 
   async function getAllChData() {
     const ch = await axios.get(
-      `https://api.mangadex.org/manga/${state.mId}/feed?order[volume]=desc&order[chapter]=desc`,
+      `/api/mangadex/manga/${state.mId}/feed?order[volume]=desc&order[chapter]=desc`,
     );
     setAllChData(ch.data.data);
   }
@@ -38,7 +38,7 @@ const Chapter = () => {
 
   const getChData = async () => {
     let res = await axios.get(
-      `https://api.mangadex.org/at-home/server/${state.id}`,
+      `/api/mangadex/at-home/server/${state.id}`,
     );
 
     let chapters = res.data.chapter.data.map((ch) => {

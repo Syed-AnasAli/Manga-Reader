@@ -7,7 +7,7 @@ const MangaCard = (state) => {
 
   async function navigation(bool) {
     const lastCh = await axios.get(
-      `https://api.mangadex.org/manga/${state.id}/feed?order[volume]=desc&order[chapter]=desc`,
+      `/api/mangadex/manga/${state.id}/feed?order[volume]=desc&order[chapter]=desc`,
     );
 
     let chNum, chId, idx;
