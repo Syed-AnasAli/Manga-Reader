@@ -26,18 +26,22 @@ const HomePage = () => {
       `/api/mangadex/manga/${mangaId}/feed?order[volume]=desc&order[chapter]=desc`,
     );
 
-    let j = 1;
+    const data = lastCh.data.data;
 
-    if (lastCh.data.data[0]?.attributes?.chapter == null) {
+    if (!data || data.length === 0) {
+      return { lastCh: 0, chId: null, ch2Id: null, last2Ch: 0 };
+    }
+
+    if (data[0]?.attributes?.chapter == null) {
       return {
         lastCh: "OS",
-        chId: lastCh.data.data[0].id,
+        chId: data[0]?.id ?? null,
         ch2Id: null,
         last2Ch: 0,
       };
     }
 
-    if (lastCh.data.data[0]?.attributes?.chapter == 0) {
+    if (data[0]?.attributes?.chapter == 0) {
       return {
         lastCh: 0,
         chId: null,
@@ -46,17 +50,27 @@ const HomePage = () => {
       };
     }
 
-    let ch = lastCh.data.data[0]?.attributes?.chapter || 0;
-    let ch2 = lastCh.data.data[j]?.attributes?.chapter || 0;
+    let j = 1;
+    let ch = data[0]?.attributes?.chapter || 0;
+    let ch2 = data[j]?.attributes?.chapter || 0;
+
     while (ch2 == ch && ch != 0) {
       j++;
-      ch2 = lastCh.data.data[j]?.attributes.chapter;
+      if (j >= data.length) {
+        return {
+          lastCh: Number(ch),
+          chId: data[0]?.id ?? null,
+          ch2Id: null,
+          last2Ch: 0,
+        };
+      }
+      ch2 = data[j]?.attributes?.chapter;
     }
 
     return {
       lastCh: Number(ch),
-      chId: lastCh.data.data[0].id,
-      ch2Id: lastCh.data.data[j].id,
+      chId: data[0]?.id ?? null,
+      ch2Id: data[j]?.id ?? null,
       last2Ch: Number(ch2),
     };
   }
