@@ -42,7 +42,7 @@ const Chapter = () => {
     let res = await axios.get(
       `/api/mangadex/at-home/server/${state.id}`,
     );
-
+  console.log("chapter data:", res.data);
     let chapters = res.data.chapter.data.map((ch) => {
       let chImg = `https://uploads.mangadex.org/data/${res.data.chapter.hash}/${ch}`;
       return { chImg };
