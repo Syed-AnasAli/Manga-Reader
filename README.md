@@ -3,6 +3,9 @@
 A React-based manga reading web app powered by the [MangaDex API](https://api.mangadex.org). Browse manga titles, view chapter lists, and read chapters directly in the browser.
 
 
+## Deployed Link: https://manga-reader015.netlify.app/
+Note: The content including Covers and Chapter panels are beign blocked by MangaDex and are not working properly on deployment, If u wish to see the content u can clone the repository and run it localy on your machine. 
+
 ## 🚀 Features
 
 - Browse a paginated list of manga titles from MangaDex
